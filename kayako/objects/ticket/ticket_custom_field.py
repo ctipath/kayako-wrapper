@@ -118,7 +118,7 @@ class TicketCustomField(KayakoObject):
         '''
         try:
             response = api._request('%s/%s' % (cls.controller, ticketid), 'GET')
-        except KayakoResponseError, error:
+        except KayakoResponseError as error:
             if 'HTTP Error 404' in str(error):
                 return None
             else:

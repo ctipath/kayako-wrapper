@@ -10,7 +10,7 @@ Created on May 5, 2011
 @author: evan
 '''
 
-class KayakoError(StandardError):
+class KayakoError(Exception):
 
     @property
     def read(self):
