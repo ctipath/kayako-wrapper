@@ -421,9 +421,9 @@ class KayakoAPI(object):
         Generates random salt and an encoded signature using SHA256.
         '''
         # Generate random 10 digit number
-        salt = str(random.getrandbits(32))
+        salt = str(random.getrandbits(32)).encode()
         # Use HMAC to encrypt the secret key using the salt with SHA256
-        encrypted_signature = hmac.new(self.secret_key, msg=salt, digestmod=hashlib.sha256).digest()
+        encrypted_signature = hmac.digest(self.secret_key, msg=salt, digest=hashlib.sha256)
         # Encode the bytes into base 64
         b64_encoded_signature = base64.b64encode(encrypted_signature)
         return salt, b64_encoded_signature
