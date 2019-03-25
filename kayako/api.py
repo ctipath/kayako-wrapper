@@ -414,7 +414,7 @@ class KayakoAPI(object):
                 first = False
             else:
                 data = '%s&%s=%s' % (data, key, urllib.parse.quote(value))
-        return data
+        return data.encode()
 
     def _generate_signature(self):
         '''
@@ -449,7 +449,7 @@ class KayakoAPI(object):
             # Auth parameters go in the body for these methods
             parameters['apikey'] = self.api_key
             parameters['salt'] = salt
-            parameters['signature'] = b64signature
+            parameters['signature'] = b64signature.decode()
             data = self._post_data(**self._sanitize_parameters(**parameters))
             request = urllib.request.Request(url, data=data, headers={'Content-length' : len(data) if data else 0})
             request.get_method = lambda: method
